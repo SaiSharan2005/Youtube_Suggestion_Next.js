@@ -16,11 +16,14 @@ export default function Navigation(props: INavigationProps) {
                     <p>Back</p>
                 </div>
             </Link>:<></>}
+            {props.next>1?
             <Link href={`/course/${props.courseId}/topic/${props.next}`}>
                 <div className='w-20 mx-1 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl text-center'>
                     <p>Next</p>
                 </div>
-            </Link>
+            </Link>:<></>
+
+            }
         </div>
     );
 }

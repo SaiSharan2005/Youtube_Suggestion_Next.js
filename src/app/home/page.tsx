@@ -1,3 +1,4 @@
+
 import CoruseCard from "@/components/CourseCard";
 
 interface Course {

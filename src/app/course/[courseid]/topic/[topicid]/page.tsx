@@ -19,7 +19,6 @@ const CourseSideBar = async (CourseId: number, TopicId: number): Promise<[SideBa
   const fetchData = await fetch(process.env.BACKEND_URL + "WholeCourse/" + CourseId);
   const response: SideBarData[] = await fetchData.json();
   let next: number | undefined, back: number | undefined, temp: number | undefined, courseTopic: string | undefined;
-
   let found = false;
   outerLoop: for (const subCourse of response) {
     for (const subTopic of subCourse.subTopics) {

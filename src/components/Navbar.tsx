@@ -5,6 +5,32 @@ import Link from "next/link"
 function Navbar() {
   const [showExtra, setShowExtra] = useState<boolean>(false)
   const [showNav, setShowNav] = useState<boolean>(false)
+    const logoutUser = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/logout_user/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // You may need to include the authentication token here if required by your backend
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        if (response.ok) {
+          // Clear authentication state (e.g., remove token from local storage)
+          localStorage.removeItem('token');
+          // Redirect to the home page or any other desired destination
+          // router.push('/');
+        } else {
+          console.error('Logout failed:', response.statusText);
+          // Handle logout failure
+        }
+      } catch (error:any) {
+        console.error('Logout failed:', error.message);
+        // Handle logout failure
+      }
+
+    
+}
   return (
     <>
       <nav className=" border-b-2 border-gray-200 dark:bg-gray-800">
@@ -42,9 +68,12 @@ function Navbar() {
                   <Link href={"/home"}>
                     <p className="text-white bg-purple-500 rounded-md px-3 py-2 text-sm font-medium dark:bg-gray-900 dark:text-white" aria-current="page">Home</p>
                   </Link>
-                  <p className="text-black hover:bg-purple-500 rounded-md px-3 py-2 text-sm font-medium  dark:text-gray-300 dark:hover:bg-gray-700 hover:text-white">Team</p>
-                  <p className="text-black hover:bg-purple-500 rounded-md px-3 py-2 text-sm font-medium  dark:text-gray-300 dark:hover:bg-gray-700 hover:text-white">Projects</p>
-                  <p className="text-black hover:bg-purple-500 rounded-md px-3 py-2 text-sm font-medium  dark:text-gray-300 dark:hover:bg-gray-700 hover:text-white">Calendar</p>
+                  <Link href="/course">
+                    <p className="text-black hover:bg-purple-500 rounded-md px-3 py-2 text-sm font-medium  dark:text-gray-300 dark:hover:bg-gray-700 hover:text-white">Course</p>
+
+                  </Link>
+                  {/* <p className="text-black hover:bg-purple-500 rounded-md px-3 py-2 text-sm font-medium  dark:text-gray-300 dark:hover:bg-gray-700 hover:text-white">Projects</p>
+                  <p className="text-black hover:bg-purple-500 rounded-md px-3 py-2 text-sm font-medium  dark:text-gray-300 dark:hover:bg-gray-700 hover:text-white">Calendar</p> */}
                 </div>
               </div>
 
@@ -81,9 +110,11 @@ function Navbar() {
           --> */}
                 {showExtra ? <div className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" >
                   {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">Your Profile</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">Settings</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-2">Sign out</a>
+                  {/* <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">Your Profile</a> */}
+                  {/* <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">Settings</a> */}
+                  
+                  <p onClick={logoutUser} className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-2">Log out</p>
+                  
                 </div> : <></>}
 
               </div>
@@ -99,15 +130,15 @@ function Navbar() {
               <Link href={"/home"}>
                 <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</p>
               </Link>
-              <Link href={"/home"}>
-                <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Team</p>
+              <Link href={"/course"}>
+                <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Course</p>
               </Link>
-              <Link href={"/home"}>
+              {/* <Link href={"/home"}>
                 <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Projects</p>
               </Link>
               <Link href={"/home"}>
                 <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Calendar</p>
-              </Link>
+              </Link> */}
             </div>
 
 
