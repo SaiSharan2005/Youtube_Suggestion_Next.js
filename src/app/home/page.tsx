@@ -1,5 +1,6 @@
 
 import CoruseCard from "@/components/CourseCard";
+import Image from 'next/image';
 
 interface Course {
   id: number;
@@ -24,9 +25,12 @@ export default async function Home() {
   return (
     <div className=" dark:bg-neutral-900">
       <div className="w-[90vw] mt-10 mx-auto flex  flex-col sm:flex-row ">
-        <img className="w-[100%] sm:w-[50%] sm:m-5 rounded-lg " src="/3644996.jpg" alt="" />
+        <Image className="w-[100%] sm:w-[50%] sm:m-5 rounded-lg " src="/3644996.jpg" alt="" width={1200} // Set width to "auto"
+  height={800} // Set a fixed height or use "auto" for height as well
+
+/>
         <div className="flex flex-col justify-evenly w-full  ">
-          <p className="m-5  text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-semibold">Let's start    <br className="hidden sm:inline" />
+          <p className="m-5  text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-semibold">Let&apos;s start    <br className="hidden sm:inline" />
  Learning ,Iamdevil</p>
           <div className="flex items-center w-[90%] mx-auto bg-purple-200 border rounded-full p-1 shadow-sm justify-evenly">
             <button

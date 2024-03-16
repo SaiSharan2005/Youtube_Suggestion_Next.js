@@ -5,6 +5,7 @@ import SideBarData from '@/interface/sideBarInterface';
 import Navigation from '@/components/Navigation';
 import YoutubeVidePlayer from '@/components/YoutubePlayer';
 import TopicInterface from '@/interface/topicInterface';
+import Image from 'next/image';
 export interface ITopicProps {
   params: {
     courseid: string;
@@ -53,7 +54,7 @@ export default async function Topic(props: ITopicProps) {
     <div className='w-[95%] mx-auto my-7 flex flex-col-reverse sm:flex-row '>
       <div className="w-[100%] sm:w-[30%] ">
         <div className='mb-5 flex items-center'>
-          <img src="/machine-learning-03-svgrepo-com.svg" alt="" className=' h-[100%] w-[15%]  mr-2 dark:invert ' />
+          <Image src="/machine-learning-03-svgrepo-com.svg" alt="" className=' h-[100%] w-[15%]  mr-2 dark:invert ' width={100} height={100}/>
           <div>
             <p className='text-xl font-bold'>Course Topic</p>
             <p className='text-xl font-semibold text-purple-600'>{courseTopic}</p>
