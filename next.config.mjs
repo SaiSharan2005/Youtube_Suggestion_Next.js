@@ -10,7 +10,7 @@
 
 const nextConfig = {
     images: {
-      domains: ['programmerhub.pythonanywhere.com'],
+      domains: ['programmerhub.pythonanywhere.com','images.unsplash.com','tailwindui.com'],
     },
   };
   
