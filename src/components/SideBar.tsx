@@ -31,7 +31,7 @@ export default function SideBar({ sideBarData, courseId }: { sideBarData: INavBa
     return (
         <div className='w-full'>
             {sideBarData.map((subCourse) => (
-                <div>
+                <div key={subCourse.subCourseId}>
                     <div className='flex items-center  w-[90%] m-1 py-2 bg-gray-100  rounded-2xl  dark:bg-neutral-900 dark:hover:bg-gray-900 hover:bg-purple-200' key={subCourse.subCourseId} onClick={() => toggleSubTopics(subCourse.subCourseId)}>
                         <div>
                             <img src="/ai-svgrepo-com.svg" alt="" className='dark:invert w-10 h-7 ' />

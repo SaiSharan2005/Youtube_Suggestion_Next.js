@@ -16,7 +16,6 @@ export default function RootLayout({ children }: Readonly<{
     <html lang="en">
       <body>
         <Providers>
-          <Navbar/>
           {children}
         </Providers>
       </body>

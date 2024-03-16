@@ -13,7 +13,7 @@ interface HomeProps {
 }
 
 const getCourse = async (): Promise<Course[]> => {
-  const fetchData = await fetch(process.env.BACKEND_URL + '/Category')
+  const fetchData = await fetch(process.env.BACKEND_URL + 'AllCategory')
   const response = await fetchData.json();
   return response;
 }

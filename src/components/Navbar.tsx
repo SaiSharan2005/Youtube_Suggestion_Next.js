@@ -12,9 +12,10 @@ function Navbar() {
           headers: {
             'Content-Type': 'application/json',
             // You may need to include the authentication token here if required by your backend
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            "Authorization": `Bearer ${localStorage.getItem('token')}`,
           },
         });
+        console.log(localStorage.getItem('token'))
         if (response.ok) {
           // Clear authentication state (e.g., remove token from local storage)
           localStorage.removeItem('token');

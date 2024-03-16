@@ -23,13 +23,13 @@ export default async function CourseId(props: ICourseIdProps) {
   const courseDetails: CourseInterface = await CouseDeatail(props.params.courseid);
   const CourseSideBarData: INavBarData[] = await CourseSideBar(props.params.courseid);
   return (
-    <div className="w-[95%] mx-auto my-7 flex">
-      <div className="w-[30%]">
-        <SideBar sideBarData={CourseSideBarData} courseId={Number(props.params.courseid)} />
+    <div className="w-[95%] mx-auto sm:my-7 flex flex-col-reverse sm:flex-row">
+      <div className="mx-auto w-[80%] sm:w-[30%]">
+        <SideBar key={1} sideBarData={CourseSideBarData} courseId={Number(props.params.courseid)} />
       </div>
-      <div className='w-[70%]'>
+      <div className=' mx-auto w-[90%] sm:w-[70%]'>
         <img src={courseDetails.thumbnail}alt="" className='w-[90%] mx-auto rounded-2xl'/>
-        <h1 className=' w-[90%] mx-auto my-7 text-5xl font-semibold'>{courseDetails.name}</h1> 
+        <h1 className=' w-[90%] mx-auto my-7 text-lg sm:text-5xl font-semibold'>{courseDetails.name}</h1> 
         <p className='w-[90%] mx-auto my-2  stext-purple-600'>{courseDetails.description}</p> 
       </div>
     </div>

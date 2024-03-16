@@ -50,8 +50,8 @@ export default async function Topic(props: ITopicProps) {
   const TopicData: TopicInterface = await TopicDetail(parseInt(props.params.topicid));
   return (
 
-    <div className='w-[95%] mx-auto my-7 flex '>
-      <div className="w-[30%] ">
+    <div className='w-[95%] mx-auto my-7 flex flex-col-reverse sm:flex-row '>
+      <div className="w-[100%] sm:w-[30%] ">
         <div className='mb-5 flex items-center'>
           <img src="/machine-learning-03-svgrepo-com.svg" alt="" className=' h-[100%] w-[15%]  mr-2 dark:invert ' />
           <div>
@@ -61,14 +61,13 @@ export default async function Topic(props: ITopicProps) {
         </div>
         <SideBar sideBarData={CourseSideBarData} courseId={parseInt(props.params.courseid)} />
       </div>
-      <div className='w-[70%] h-[70vh]'>
+      <div className='w-[100%] sm:w-[70%] sm:max-h-[70vh]'>
         <p className='text-center text-xl font-bold mb-7'>{TopicData.topic_name}</p>
         <YoutubeVidePlayer topicData={TopicData} />
         <div className='w-full my-3 mr-2 flex justify-end'>
           <Navigation next={next} back={back} courseId={parseInt(props.params.courseid)} />
         </div>
       </div>
-
     </div>
   );
 }
