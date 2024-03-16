@@ -4,7 +4,7 @@ import SideBarData from '@/interface/sideBarInterface';
 // import topicInterface from '@/interface/TopicInterface';
 import Navigation from '@/components/Navigation';
 import YoutubeVidePlayer from '@/components/YoutubePlayer';
-import TopicInterface from '@/interface/TopicInterface';
+import TopicInterface from '@/interface/topicInterface';
 export interface ITopicProps {
   params: {
     courseid: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import TopicInterface from '@/interface/TopicInterface';
+import TopicInterface from '@/interface/topicInterface';
 
 interface YoutubeVideoPlayerProps {
   topicData: TopicInterface;
