@@ -13,7 +13,7 @@ function Navbar() {
           headers: {
             'Content-Type': 'application/json',
             // You may need to include the authentication token here if required by your backend
-            "Authorization": `Bearer ${localStorage.getItem('token')}`,
+            "Authorization": `Token ${localStorage.getItem('token')}`,
           },
         });
         console.log(localStorage.getItem('token'))
