@@ -4,7 +4,7 @@ import Link from "next/link"
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 import { useUserContext } from '@/context/userData';
 import { useRouter } from 'next/navigation'
-
+import {LogIn} from  "@/components/FetchData"
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,24 +25,18 @@ const Login: React.FC = () => {
 
   const submitLogin = async () => {
     try {
-      console.log(username, password)
-      const token = await fetch('http://127.0.0.1:8000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ "username": username, "password": password }),
-      });
+      // console.log(username, password)
+      const response = await LogIn(username,password);
+      
 
-      if (!token.ok) {
+      if (!response.success) {
         // Handle non-successful response (e.g., show an error message)
         setLoginFail(true);
         setLoginStatus(false);
         throw new Error('Login failed');
       }
 
-      const response = await token.json();
-      localStorage.setItem('token', response.token);
+      localStorage.setItem('token', response.data.token);
       setLoginStatus(true)
       router.push("/home")
     } catch (error: any) {

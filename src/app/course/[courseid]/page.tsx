@@ -10,14 +10,14 @@ export interface ICourseIdProps {
 }
 
 const CouseDeatail = async (CourseId:number): Promise<CourseInterface> => {
-  const fetchData = await fetch(process.env.BACKEND_URL + "Category/"+CourseId)
+  const fetchData = await fetch(process.env.BACKEND_URL + "Category/"+CourseId);
   const response = await fetchData.json();
   return response;
 }
 const CourseSideBar = async (CourseId: number): Promise<INavBarData[]> => {
   const fetchData = await fetch(process.env.BACKEND_URL + "WholeCourse/" + CourseId);
   const response = await fetchData.json();
-  return response;
+  return response;1
 }
 
 export default async function CourseId(props: ICourseIdProps) {
