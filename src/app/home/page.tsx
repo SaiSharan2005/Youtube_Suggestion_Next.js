@@ -25,6 +25,7 @@ const Home: React.FC<HomeProps> = () => {
     const fetchData = async () => {
       const data = await getCourse();
       setCourses(data);
+      console.log(courses)
     };
 
     fetchData();

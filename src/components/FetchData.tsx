@@ -1,3 +1,4 @@
+"use server"
 import CourseInterface from "@/interface/courseInterface";
 
 export const getCourse = async (): Promise<CourseInterface[]> => {
@@ -8,7 +9,7 @@ export const getCourse = async (): Promise<CourseInterface[]> => {
 
 export const LogOut = async (token:string|null): Promise<boolean> => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/logout_user/', {
+    const response = await fetch(process.env.BACKEND_URL+'api/logout_user/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,3 +27,30 @@ export const LogOut = async (token:string|null): Promise<boolean> => {
     return false; 
   }
 };
+
+export const SignUp = async (username: string, email: string, password: string, password2: string): Promise<{ success: boolean, data: any }> => {
+  try {
+    const response = await fetch(process.env.BACKEND_URL+"api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+        password2: password2
+      })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return { success: true, data: data };
+    } else {
+      return { success: false, data: null };
+    }
+  } catch (error) {
+    console.error("Error during registration:", error);
+    return { success: false, data: null };
+  }
+}

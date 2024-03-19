@@ -12,12 +12,12 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false); // State to toggle password visibility
   const {loginStatus,setLoginStatus} = useUserContext();
   const router = useRouter()
-  useEffect(()=>{
-    if(loginStatus){
-      router.push("/home");
-      alert("You are already logged in");
-    }
-  })
+  // useEffect(()=>{
+  //   if(loginStatus){
+  //     router.push("/home");
+  //     alert("You are already logged in");
+  //   }
+  // })
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

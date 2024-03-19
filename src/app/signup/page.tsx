@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 import { redirect } from 'react-router-dom';
 import { useUserContext } from '@/context/userData';
 import { useRouter } from 'next/navigation'
+import  {SignUp} from "@/components/FetchData"
 
 const Signup: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -64,29 +65,16 @@ const Signup: React.FC = () => {
                 setPasswordError('Passwords do not match');
                 return;
             }
-
-
-            const token = await fetch("http://127.0.0.1:8000/api/register", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  "username": username,
-                  "email": email,
-                  "password": password,
-                  "password2": password2
-              }),    });
+            const token = await SignUp(username,email,password,password2)
           
-            if (!token.ok) {
+            if (!token.success) {
                 // Handle non-successful response (e.g., show an error message)
                 setLoginStatus(false)
                 throw new Error('Signup failed');
             }
 
-            const response = await token.json();
-            localStorage.setItem('token', response.token.access);
-            localStorage.setItem('refresh', response.token.refresh);
+        
+            localStorage.setItem('token', token.data.token);
             setLoginStatus(true);
             router.push("/home")
 
