@@ -1,5 +1,8 @@
-
+"use client"
+import { useEffect, useState } from 'react';
 import CoruseCard from "@/components/CourseCard";
+import { useUserContext } from '@/context/userData';
+import {getCourse} from '@/components/FetchData';
 import Image from 'next/image';
 
 interface Course {
@@ -13,38 +16,34 @@ interface HomeProps {
   courses: Course[];
 }
 
-const getCourse = async (): Promise<Course[]> => {
 
-  const fetchData = await fetch(process.env.BACKEND_URL + '/AllCategory')
-  const response = await fetchData.json();
-  return response;
-}
+const Home: React.FC<HomeProps> = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const { userId, username } = useUserContext();
 
-export default async function Home() {
-  const Courses = await getCourse();
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getCourse();
+      setCourses(data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className=" dark:bg-neutral-900">
-      <div className="w-[90vw] mt-10 mx-auto flex  flex-col sm:flex-row ">
-        <Image className="w-[100%] sm:w-[50%] sm:m-5 rounded-lg " src="/3644996.jpg" alt="" width={1200} // Set width to "auto"
-  height={800} // Set a fixed height or use "auto" for height as well
-
-/>
-        <div className="flex flex-col justify-evenly w-full  ">
-          <p className="m-5  text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-semibold">Let&apos;s start    <br className="hidden sm:inline" />
- Learning ,Iamdevil</p>
+    <div className="dark:bg-neutral-900">
+      <div className="w-[90vw] mt-10 mx-auto flex flex-col sm:flex-row ">
+        <Image className="w-[100%] sm:w-[50%] sm:m-5 rounded-lg " src="/3644996.jpg" alt="" width={1200} height={800} />
+        <div className="flex flex-col justify-evenly w-full">
+          <p className="m-5 text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-semibold">Let&apos;s start    <br className="hidden sm:inline" /> Learning, {username}</p>
           <div className="flex items-center w-[90%] mx-auto bg-purple-200 border rounded-full p-1 shadow-sm justify-evenly">
             <button
               type="button"
-              className=" ml-2 flex-shrink-0 text-purple-900 focus:outline-none"
+              className="ml-2 flex-shrink-0 text-purple-900 focus:outline-none"
             >
               <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <path
-                  fill="none"
-                  d="M0 0h24v24H0z"
-                />
-                <path
-                  d="M21.29 20.71l-5.5-5.5A7.5 7.5 0 1118 12a7.5 7.5 0 01-2.21 5.3l5.5 5.5a1 1 0 001.42 0 1 1 0 000-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z"
-                />
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M21.29 20.71l-5.5-5.5A7.5 7.5 0 1118 12a7.5 7.5 0 01-2.21 5.3l5.5 5.5a1 1 0 001.42 0 1 1 0 000-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z" />
               </svg>
             </button>
             <input
@@ -56,16 +55,15 @@ export default async function Home() {
               <p>Search</p>
             </button>
           </div>
-
         </div>
       </div>
       <div className="Courses w-[80vw] mx-auto">
-        {Courses.map((course) => (
+        {courses.map((course) => (
           <CoruseCard key={course.id} id={course.id} name={course.name} description={course.description} thumbnail={course.thumbnail} />
         ))}
       </div>
-
     </div>
-
-  )
+  );
 }
+
+export default Home;

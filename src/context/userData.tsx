@@ -1,36 +1,61 @@
+"use client"
+import { createContext, useContext, Dispatch, SetStateAction, useState, useEffect } from "react";
+import GetUserData from "@/hooks/getUserData";
 
-'use client';
-
-import { redirect } from 'react-router-dom';
-import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
-import GetUserData from "@/hooks/getUserData"
+interface UserDataI {
+    userId: number;
+    username: string;
+}
 
 interface ContextProps {
-    userId: number,
-    setUserId: Dispatch<SetStateAction<number>>,
-    username: string,
-    setUsername: Dispatch<SetStateAction<string>>
+    userId: number;
+    setUserId: Dispatch<SetStateAction<number>>;
+    username: string;
+    setUsername: Dispatch<SetStateAction<string>>;
+    loginStatus:boolean
+    setLoginStatus:Dispatch<SetStateAction<boolean>>
 }
 
 const UserData = createContext<ContextProps>({
     userId: -1,
     setUserId: (): number => -1,
     username: "",
-    setUsername: (): string => ""
-})
+    setUsername: (): string => "",
+    loginStatus:false,
+    setLoginStatus: (): boolean =>false
 
-export const UserDataProvider = async({ children }:any) => {
+});
+
+export const UserDataProvider = ({ children }: any) => {
     const [userId, setUserId] = useState<number>(-1);
     const [username, setUsername] = useState<string>("");
-    let userData = await  GetUserData("1ed0df2c60a0a129cae47bf73341d00348d30423")
-    // let userData = await  GetUserData(await localStorage.getItem("token"))
-    setUsername(userData.username)
-    setUserId(userData.userid)
+    const [loginStatus, setLoginStatus] = useState<boolean>(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userData = await GetUserData(localStorage.getItem("token"));
+                if (typeof userData !== "string") {
+                    setUsername(userData.username);
+                    setUserId(userData.id); // Adjusted property name
+                    setLoginStatus(true);
+                } else {
+                    console.error("Error fetching user data:", userData);
+                    setLoginStatus(false);
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+
+        fetchData();
+
+    }, []); 
     return (
-        <UserData.Provider value={{ userId, setUserId, username, setUsername }}>
+        <UserData.Provider value={{ userId, setUserId, username, setUsername ,loginStatus,setLoginStatus}}>
             {children}
         </UserData.Provider>
-    )
-}
+    );
+};
 
 export const useUserContext = () => useContext(UserData);

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Link from "next/link"
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 import { redirect } from 'react-router-dom';
+import { useUserContext } from '@/context/userData';
+import { useRouter } from 'next/navigation'
 
 const Signup: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -12,7 +14,9 @@ const Signup: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
     const [showPassword2, setShowPassword2] = useState(false); // State to toggle confirm password visibility
     const [passwordError, setPasswordError] = useState('');
-
+    const {setLoginStatus} = useUserContext();
+    const router = useRouter()
+    
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -76,14 +80,15 @@ const Signup: React.FC = () => {
           
             if (!token.ok) {
                 // Handle non-successful response (e.g., show an error message)
+                setLoginStatus(false)
                 throw new Error('Signup failed');
             }
 
             const response = await token.json();
             localStorage.setItem('token', response.token.access);
             localStorage.setItem('refresh', response.token.refresh);
-            console.log(response);
-            redirect("/home");
+            setLoginStatus(true);
+            router.push("/home")
 
         }
         catch (error: any) {

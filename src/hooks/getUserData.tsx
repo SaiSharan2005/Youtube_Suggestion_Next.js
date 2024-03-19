@@ -1,25 +1,24 @@
 
 export interface UserDataI {
-    userid: number;
+    id: number;
     username: string;
 }
 
 const GetUserData = async (token: string|null): Promise<UserDataI|string> => {
     try {
-        const data = await fetch(process.env.BACKEND_URL + "GetUserData/", {
-            method: "POST",
+        const data = await fetch("http://127.0.0.1:8000/" + "GetUserData/", {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${token}` // Use "Authorization" header instead of "authentication"
             },
         });
-        console.log(data)
-
         if (!data.ok) {
-            return "error while fetching user data";
+            return "error";
         }
-
+        
         const response = await data.json() as UserDataI; // Ensure response conforms to UserDataI
+        console.log("data",response)
         return response;
     } catch (error) {
         console.error('Error during fetching user data:', error);
@@ -28,5 +27,5 @@ const GetUserData = async (token: string|null): Promise<UserDataI|string> => {
 };
 
 
- GetUserData("1ed0df2c60a0a129cae47bf73341d00348d30423")
-// export default GetUserData;
+//  GetUserData("1ed0df2c60a0a129cae47bf73341d00348d30423")
+export default GetUserData;

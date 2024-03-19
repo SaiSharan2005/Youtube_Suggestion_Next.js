@@ -1,16 +1,19 @@
-import React from 'react'
+"use client"
 
-import { useUserContext} from '@/context/userData';
-function page() {
-  const { userId, username } = useUserContext();
-
+import { useRouter } from 'next/router';
+const handleClick = () => {
+  const router = useRouter();
+  router.push('/new-page');  
+};
+export default function Page() {
+   
+ 
   return (
-    <div>
- <p>     userid{userId}</p>
- <p>username:{username}</p>
-      
-    </div>
+    <button type="button" onClick={ handleClick}>
+      Dashboard : {}
+    </button>
+
+
+
   )
 }
-
-export default page
