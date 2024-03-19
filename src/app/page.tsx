@@ -1,13 +1,9 @@
+import React from 'react'
 
-export default function Page() {
-   
- 
+export default function page() {
   return (
-    <button type="button" >
-      Dashboard : 
-    </button>
-
-
-
+    <div>
+      ntg
+    </div>
   )
 }
