@@ -13,7 +13,6 @@ interface Course {
 }
 
 interface HomeProps {
-  courses: Course[];
 }
 
 
