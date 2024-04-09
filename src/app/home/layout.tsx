@@ -1,7 +1,7 @@
 import "../globals.css";
 // import Providers from "./providers";
 // import ThemeSwitcher from "./ThemeSwitcher";
-import {Providers}  from "../providers";
+import { Providers } from "../providers";
 import Navbar from "@/components/Navbar"
 export const metadata = {
   title: "Create Next App",
@@ -9,16 +9,17 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{
-    children: React.ReactNode;
-  }>){
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="dark:bg-neutral-900">
-        <Providers>
-        <Navbar />
-          {children}
-        </Providers>
-      </body>
-    </html>
+ 
+        <html lang="en">
+          <body className="dark:bg-neutral-900">
+            <Providers>
+              <Navbar />
+              {children}
+            </Providers>
+          </body>
+        </html>
   );
 }

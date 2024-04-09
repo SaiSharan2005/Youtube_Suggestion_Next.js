@@ -16,7 +16,7 @@ export default function CodeBlock(props: ICodeBlockProps) {
     return (
         <div className='bg-gray-500 grid place-items-center rounded-md'>
             <div className=' w-full bg-[#3a404d] rounded-md overflow-hidden'>
-                <div className='flex justify-between px-4 text-white  text-xs items-center'>
+                <div className='flex justify-between px-4 py-2 text-white  text-xs items-center'>
                     <p className="text-sm">Example Code</p>
                     {copy ? (<button className="py-1 inline-flex items-center gap-1">
                         <span>
@@ -30,7 +30,7 @@ export default function CodeBlock(props: ICodeBlockProps) {
                             setTimeout(() => {
                                 setCopy(false);
                             }, 3000)
-                        }}> <FaRegClipboard /> copy code</button>
+                        }}> <FaRegClipboard /> Copy code</button>
                     )}
                 </div>
 

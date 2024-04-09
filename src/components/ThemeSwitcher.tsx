@@ -9,6 +9,7 @@ export default function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme()
 
   useEffect(() =>  setMounted(true), [])
+  console.log(resolvedTheme)
 
   if (!mounted) return (
     <Image
@@ -31,3 +32,4 @@ export default function ThemeSwitch() {
   }
 
 }
+

@@ -49,8 +49,10 @@ function Navbar() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <Image className="h-8 w-auto" src="https://tailwindui.com/Image/logos/mark.svg?color=indigo&shade=500" alt="Your Company" width={20} height={10} />
+                {/* <Image className="h-8 w-auto" src="https://tailwindui.com/Image/logos/mark.svg?color=indigo&shade=500" alt="Your Company" width={20} height={10} /> */}
+                <p className='font-bold'>ProgrammerHub</p>
               </div>
+
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <Link href={"/home"}>
@@ -90,7 +92,7 @@ function Navbar() {
                   </div> : <></>}
 
                 </div>
-                : <div className='flex '>
+                : <div className='hidden sm:ml-6 sm:flex '>
 
                   <Link href="/login">
                     <p className="text-black hover:bg-purple-500 rounded-md px-3 py-2 text-md font-medium  dark:text-gray-300 dark:hover:bg-gray-700 hover:text-white">Login</p>
@@ -116,6 +118,12 @@ function Navbar() {
               </Link>
               <Link href={"/course"}>
                 <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Course</p>
+              </Link>
+              <Link href={"/login"}>
+                <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Login</p>
+              </Link>
+              <Link href={"/signup"}>
+                <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Signup</p>
               </Link>
               {/* <Link href={"/home"}>
                 <p className=" text-gray-700 hover:bg-purple-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">Projects</p>
