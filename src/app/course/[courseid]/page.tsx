@@ -1,12 +1,23 @@
-import * as React from 'react';
+
+// import * as React from 'react';
+import Image from 'next/image';
+import { Metadata } from 'next';
 import SideBar, { INavBarData } from '@/components/SideBar';
 import sideBarInterface from '@/interface/sideBarInterface'
 import CourseInterface from '@/interface/courseInterface';
-import Image from 'next/image';
+
 export interface ICourseIdProps {
   params: {
     courseid: number;
   };
+}
+
+export const generateMetadata =async ({params}:ICourseIdProps):Promise<Metadata> => {
+  const courseDetails: CourseInterface = await CouseDeatail(params.courseid);
+  return {
+    title:courseDetails.name+" ProgrammerHub",
+    description:courseDetails.description
+  }
 }
 
 const CouseDeatail = async (CourseId:number): Promise<CourseInterface> => {
@@ -21,8 +32,11 @@ const CourseSideBar = async (CourseId: number): Promise<INavBarData[]> => {
 }
 
 export default async function CourseId(props: ICourseIdProps) {
+
   const courseDetails: CourseInterface = await CouseDeatail(props.params.courseid);
   const CourseSideBarData: INavBarData[] = await CourseSideBar(props.params.courseid);
+  
+  
   return (
     <div className="w-[95%] mx-auto sm:my-7 flex flex-col-reverse sm:flex-row">
       <div className="mx-auto w-[80%] sm:w-[30%]">
