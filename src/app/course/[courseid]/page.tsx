@@ -16,7 +16,10 @@ export const generateMetadata =async ({params}:ICourseIdProps):Promise<Metadata>
   const courseDetails: CourseInterface = await CouseDeatail(params.courseid);
   return {
     title:courseDetails.name+" ProgrammerHub",
-    description:courseDetails.description
+    description:courseDetails.description,
+    openGraph:{
+      images:courseDetails.thumbnail
+    }
   }
 }
 

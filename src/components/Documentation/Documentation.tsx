@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DocumentationInterface, DocumentationDataInterface } from '@/interface/documentationInterface';
 import CodeBlock from "@/components/Documentation/CodeBlock"
+import Image from 'next/image';
 
 const DocumentationWholeData = async (DocumentationId: number): Promise<DocumentationDataInterface[]> => {
   const fetchData = await fetch(process.env.BACKEND_URL + "DocumentData/" + DocumentationId, { cache: 'no-store' });
@@ -18,7 +19,7 @@ export async function Documentation (props: DocumentationInterface) {
         <div key={index} className='my-5 mx-3 '>
           {data.show_format === "text"  &&  <div dangerouslySetInnerHTML={{ __html: data.text }} />}
           {data.show_format === "code"  &&<CodeBlock codeString={data.text}/>}
-          {data.show_format === "image" && <img src={data.image} alt="Image" className='max-h-[60vh]'/>}
+          {data.show_format === "image" && <Image src={data.image} alt="Image" className='max-h-[60vh]' width={900} height={600}/>}
        </div>
       ))}
     </div>
