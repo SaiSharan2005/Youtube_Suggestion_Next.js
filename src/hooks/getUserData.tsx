@@ -6,7 +6,8 @@ export interface UserDataI {
 
 const GetUserData = async (token: string|null): Promise<UserDataI|string> => {
     try {
-        const data = await fetch("http://127.0.0.1:8000/" + "GetUserData/", {
+        // console.log("akjndgl",process.env.BACKEND_URL)
+        const data = await fetch("GetUserData/", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -18,7 +19,6 @@ const GetUserData = async (token: string|null): Promise<UserDataI|string> => {
         }
         
         const response = await data.json() as UserDataI; // Ensure response conforms to UserDataI
-        console.log("data",response)
         return response;
     } catch (error) {
         console.error('Error during fetching user data:', error);

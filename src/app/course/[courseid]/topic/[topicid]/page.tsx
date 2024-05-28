@@ -1,13 +1,15 @@
 import * as React from 'react';
+import { Metadata } from 'next';
+import Image from 'next/image';
 import SideBar, { INavBarData } from '@/components/SideBar';
-import SideBarData from '@/interface/sideBarInterface';
-// import topicInterface from '@/interface/TopicInterface';
 import Navigation from '@/components/Navigation';
 import YoutubeVidePlayer from '@/components/YoutubePlayer';
-import TopicInterface from '@/interface/topicInterface';
-import Image from 'next/image';
 import { Documentation } from '@/components/Documentation/Documentation';
+// import topicInterface from '@/interface/TopicInterface';
+import SideBarData from '@/interface/sideBarInterface';
+import TopicInterface from '@/interface/topicInterface';
 import { DocumentationInterface } from '@/interface/documentationInterface';
+  
 export interface ITopicProps {
   params: {
     courseid: string;
@@ -58,7 +60,12 @@ const DocumentationDetail = async (DocumentationId: number): Promise<Documentati
     return null; // Return null in case of error
   }
 }
-
+export const generateMetadata =async ({params}:ITopicProps):Promise<Metadata> => {
+  const TopicData: TopicInterface = await TopicDetail(parseInt(params.topicid));
+  return {
+    title:TopicData.topic_name+" ProgrammerHub",
+  }
+}
 
 export default async function Topic(props: ITopicProps) {
 

@@ -28,23 +28,7 @@ const Login: React.FC = () => {
         }
     };
 
-    const draftMode = async () => {
-        console.log(process.env.BACKEND_URL + "/api/login")
-        const data = await fetch(process.env.BACKEND_URL + "/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: "iamdevil",
-                password: "Lucifer@2005",
-            }),
-        });
-        // const responseText = await data.text();
-
-        console.log("data:", await data.text())
-
-    }
+    
     return (
         <div className="bg-gray-200 p-3 w-full rounded-lg border-gray-300 border-2 ">
             <div className="my-3 ">

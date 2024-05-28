@@ -1,6 +1,6 @@
 "use server"
 import CourseInterface from "@/interface/courseInterface";
-
+import { userTokenDataInterfaceI } from "@/interface/userTokenDataInterface";
 export const getCourse = async (): Promise<CourseInterface[]> => {
   const fetchData = await fetch(process.env.BACKEND_URL + '/AllCategory');
   const response = await fetchData.json();
@@ -76,5 +76,29 @@ export const LogIn = async (username: string, password: string): Promise<{ succe
     return { success: false, data: null };
   }
 
+
+}
+
+export const getUserData = async (token: string): Promise<{ success: boolean, data: userTokenDataInterfaceI }> => {
+  try {
+    const response = await fetch(process.env.BACKEND_URL+"GetUserData/", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${token}` // Use "Authorization" header instead of "authentication"
+        },
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      return { success: true, data: data };
+    } else {
+      return { success: false, data: {userId:-1,username:""} };
+    }
+  } catch (error) {
+    console.error("Error during registration:", error);
+    return { success: false, data: {userId:-1,username:""}};
+  }
+  
 
 }

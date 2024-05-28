@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ThemeSwitch from './ThemeSwitcher'
 import Image from 'next/image';
 import Link from "next/link";
@@ -10,15 +10,19 @@ import { LogOut } from '@/components/FetchData';
 function Navbar() {
   const [showExtra, setShowExtra] = useState<boolean>(false)
   const [showNav, setShowNav] = useState<boolean>(false)
-  const { userId, username, loginStatus } = useUserContext();
+  const { userId,setUsername, username, loginStatus ,setLoginStatus,getUserDataWithToken} = useUserContext();
   const router = useRouter()
-  
+  useEffect(()=>{
+    getUserDataWithToken(localStorage.getItem("token"))
+})
   const logoutUser = async () => {
     try {
       const response = await LogOut(await localStorage.getItem('token'))
       
       if (response) {
         localStorage.removeItem('token');
+        setLoginStatus(false)
+        setUsername("")
         router.push('/login') 
       } else {
         console.error('Logout failed:', );
