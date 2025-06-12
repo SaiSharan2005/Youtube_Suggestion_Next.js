@@ -54,7 +54,7 @@ function Navbar() {
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
                 {/* <Image className="h-8 w-auto" src="https://tailwindui.com/Image/logos/mark.svg?color=indigo&shade=500" alt="Your Company" width={20} height={10} /> */}
-                <p className='font-bold'>ProgrammerHub</p>
+                <p className='font-bold'>ElanCode</p>
               </div>
 
               <div className="hidden sm:ml-6 sm:block">
