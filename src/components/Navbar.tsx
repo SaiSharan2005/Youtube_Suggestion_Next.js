@@ -10,22 +10,22 @@ import { LogOut } from '@/components/FetchData';
 function Navbar() {
   const [showExtra, setShowExtra] = useState<boolean>(false)
   const [showNav, setShowNav] = useState<boolean>(false)
-  const { userId,setUsername, username, loginStatus ,setLoginStatus,getUserDataWithToken} = useUserContext();
+  const { userId, setUsername, username, loginStatus, setLoginStatus, getUserDataWithToken } = useUserContext();
   const router = useRouter()
-  useEffect(()=>{
+  useEffect(() => {
     getUserDataWithToken(localStorage.getItem("token"))
-})
+  })
   const logoutUser = async () => {
     try {
       const response = await LogOut(await localStorage.getItem('token'))
-      
+
       if (response) {
         localStorage.removeItem('token');
         setLoginStatus(false)
         setUsername("")
-        router.push('/login') 
+        router.push('/login')
       } else {
-        console.error('Logout failed:', );
+        console.error('Logout failed:',);
       }
     } catch (error: any) {
       console.error('Logout failed:', error.message);
@@ -53,8 +53,18 @@ function Navbar() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                {/* <Image className="h-8 w-auto" src="https://tailwindui.com/Image/logos/mark.svg?color=indigo&shade=500" alt="Your Company" width={20} height={10} /> */}
-                <p className='font-bold'>ElanCode</p>
+                {/* LOGO HERE */}
+                <Link legacyBehavior href="/home">
+                  <a>
+                    <Image
+                      src="/elancode_transparent.png"       // path in public/
+                      alt="ElanCode Logo"
+                      width={55}    // ← was 32
+                      height={55}   // ← was 32
+                      priority             // optional: for critical images
+                    />
+                  </a>
+                </Link>
               </div>
 
               <div className="hidden sm:ml-6 sm:block">
